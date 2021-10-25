@@ -24,6 +24,7 @@ export default function PhonebookPage() {
 
 	useEffect(() => {
 		dispatch(fetchAllContacts());
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
 
 	return (

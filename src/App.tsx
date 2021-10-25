@@ -1,7 +1,6 @@
 import React, { useEffect } from "react";
 import { useAppDispatch, useAppSelector } from "./hooks/redux";
 import { getCurrentUser } from "./redux/auth/reducers/ActionCreaters";
-// import { fetchAllContacts } from "./redux/contacts/redusers/ActionCreaters";
 
 import Header from "./components/Header";
 import Router from "./router/Router";
@@ -22,8 +21,8 @@ function App() {
 
 	useEffect(() => {
 		dispatch(getCurrentUser());
-		// dispatch(fetchUser());
-		// dispatch(fetchAllContacts());
+
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
 	return (
 		<>

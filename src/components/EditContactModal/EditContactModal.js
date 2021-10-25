@@ -121,7 +121,7 @@ export default function EditContactModal({
 							error={!!errors.number}
 							helperText={errors?.number?.message}
 						/>
-						<PrimaryButton type="submit">Add new contact</PrimaryButton>
+						<PrimaryButton type="submit">Edit contact</PrimaryButton>
 					</Form>
 				</Box>
 			</Backdrop>
