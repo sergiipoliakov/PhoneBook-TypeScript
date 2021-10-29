@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, FC } from "react";
 import { useAppDispatch } from "../../../hooks/redux";
 import { deleteContact } from "../../../redux/contacts/redusers/ActionCreaters";
 import {
@@ -11,7 +11,7 @@ import {
 } from "@material-ui/core";
 
 import DeleteForeverIcon from "@material-ui/icons/DeleteForever";
-import EditContactModal from "../../EditContactModal/EditContactModal";
+import { EditContactModal } from "../../EditContactModal/EditContactModal";
 
 type Contact = {
 	id: string;
@@ -19,14 +19,13 @@ type Contact = {
 	number: string;
 };
 
-interface Props {
+interface IProps {
 	contact: Contact;
 }
 
-export default function ContactItem({ contact }: Props) {
+export const ContactItem: FC<IProps> = ({ contact }) => {
 	const dispatch = useAppDispatch();
 	const [showModal, setShowModal] = useState(false);
-	// const {constacts}=useAppSelector(state=>state.contactsReducer)
 
 	const onDeleteContact = (id: string) => {
 		dispatch(deleteContact(id));
@@ -41,10 +40,7 @@ export default function ContactItem({ contact }: Props) {
 		<>
 			<ListItem button onClick={showEditModal}>
 				<ListItemAvatar>
-					<Avatar
-					// alt={`Avatar n°${value + 1}`}
-					// src={`/static/images/avatar/${value + 1}.jpg`}
-					/>
+					<Avatar />
 				</ListItemAvatar>
 				<ListItemText>{name}</ListItemText>
 
@@ -65,4 +61,4 @@ export default function ContactItem({ contact }: Props) {
 			/>
 		</>
 	);
-}
+};

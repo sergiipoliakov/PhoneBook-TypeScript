@@ -1,5 +1,12 @@
+import React, { ReactNode } from "react";
+
 import { Button } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core";
+
+interface IProps {
+	children: ReactNode;
+	type?: string;
+}
 
 const useStyles = makeStyles((theme) => ({
 	root: {
@@ -7,17 +14,18 @@ const useStyles = makeStyles((theme) => ({
 	},
 }));
 
-export default function PrimaryButton({ children, type, ...props }) {
+export const PrimaryButton = ({ children, type, ...props }: IProps) => {
 	const styles = useStyles();
 	return (
 		<Button
+			type="submit"
 			className={styles.root}
-			type={type}
 			fullWidth
 			variant="contained"
 			color="primary"
+			{...props}
 		>
 			{children}
 		</Button>
 	);
-}
+};

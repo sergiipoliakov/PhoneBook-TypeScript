@@ -1,3 +1,5 @@
+import React from "react";
+
 import { useAppDispatch } from "../../../hooks/redux";
 import { addContact } from "../../../redux/contacts/redusers/ActionCreaters";
 
@@ -7,8 +9,13 @@ import { yupResolver } from "@hookform/resolvers/yup";
 
 import Form from "../../UI/Form/Form";
 import { Input } from "../../UI/Input/Input";
-import PrimaryButton from "../../UI/PrimaryButton/PrimaryButton";
+import { PrimaryButton } from "../../UI/PrimaryButton/PrimaryButton";
 import parsePhoneNumberFromString from "libphonenumber-js";
+
+type FormValues = {
+	name: string;
+	number: string;
+};
 
 const schema = yup.object().shape({
 	name: yup
@@ -18,7 +25,7 @@ const schema = yup.object().shape({
 	number: yup.string().required("Phone number is a required field"),
 });
 
-const normalizePhoneNumber = (value) => {
+const normalizePhoneNumber = (value: string) => {
 	const phoneNumber = parsePhoneNumberFromString(value);
 	if (!phoneNumber) {
 		return value;
@@ -26,19 +33,19 @@ const normalizePhoneNumber = (value) => {
 	return phoneNumber.formatInternational();
 };
 
-export default function ContactsEditor() {
+export const ContactsEditor: React.FC = () => {
 	const dispatch = useAppDispatch();
 
 	const {
 		register,
 		handleSubmit,
 		formState: { errors },
-	} = useForm({
+	} = useForm<FormValues>({
 		mode: "onBlur",
 		resolver: yupResolver(schema),
 	});
-	const onSubmit = (data) => {
-		dispatch(addContact(data));
+	const onSubmit = ({ name, number }: FormValues) => {
+		dispatch(addContact({ name, number }));
 	};
 
 	return (
@@ -61,8 +68,10 @@ export default function ContactsEditor() {
 					label="Phone number"
 					name="number"
 					required
-					onChange={(event) => {
-						event.target.value = normalizePhoneNumber(event.target.value);
+					onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
+						return (event.target.value = normalizePhoneNumber(
+							event.target.value
+						));
 					}}
 					error={!!errors.number}
 					helperText={errors?.number?.message}
@@ -71,4 +80,4 @@ export default function ContactsEditor() {
 			</Form>
 		</div>
 	);
-}
+};

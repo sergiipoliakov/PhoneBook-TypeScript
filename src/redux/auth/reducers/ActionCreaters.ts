@@ -24,8 +24,6 @@ const token = {
 	},
 };
 
-// axios.defaults.headers.common.Authorization = `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MTcxZTZiNGM5MGZhOTAwMTc2ODAzNjciLCJpYXQiOjE2MzQ5MDk0MjJ9.ftPL8u8Kq28ZXxfR0m0E_qQOhROGuUh6RQQaiYljQ1U`;
-
 export const fetchUser = (credentials: Credentials) => async (
 	dispatch: AppDispatch
 ) => {

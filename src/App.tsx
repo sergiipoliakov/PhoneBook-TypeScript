@@ -2,8 +2,8 @@ import React, { useEffect } from "react";
 import { useAppDispatch, useAppSelector } from "./hooks/redux";
 import { getCurrentUser } from "./redux/auth/reducers/ActionCreaters";
 
-import Header from "./components/Header";
-import Router from "./router/Router";
+import Header from "./components/Header/Header";
+import { Router } from "./router/Router";
 import { Backdrop, CircularProgress, makeStyles } from "@material-ui/core";
 
 const useStyles = makeStyles((thema) => ({

@@ -21,7 +21,7 @@ const useStyles = makeStyles((theme) => ({
 	},
 }));
 
-export default function AppBar() {
+export const Navigation: React.FC = () => {
 	const styles = useStyles();
 	const location = useLocation();
 	return (
@@ -44,4 +44,4 @@ export default function AppBar() {
 			</MenuItem>
 		</MenuList>
 	);
-}
+};

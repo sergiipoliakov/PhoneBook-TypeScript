@@ -1,21 +1,28 @@
-import React from "react";
+import React, { FC } from "react";
 import { Switch, Route } from "react-router-dom";
-import PrivateRoute from "../components/PrivateRoute/PrivateRoute";
-import PublicRoute from "../components/PublicRoute/PublicRoute";
+import { PrivateRoute } from "../components/PrivateRoute/PrivateRoute";
+import { PublicRoute } from "../components/PublicRoute/PublicRoute";
 
-import HomePage from "../pages/HomePage";
-import LoginPage from "../pages/LoginPage.jsx";
-import PhonebookPage from "../pages/PhonebookPage";
-import RegisterPage from "../pages/RegisterPage";
+import { HomePage } from "../pages/HomePage";
+import { LoginPage } from "../pages/LoginPage";
+import { PhonebookPage } from "../pages/PhonebookPage";
+import { RegisterPage } from "../pages/RegisterPage";
 
-export const paths = {
+interface IPaths {
+	HOME: string;
+	PHONEBOOK: string;
+	LOGIN: string;
+	REGISTER: string;
+}
+
+export const paths: IPaths = {
 	HOME: "/",
 	PHONEBOOK: "/phonebook",
 	LOGIN: "/login",
 	REGISTER: "/register",
 };
 
-export default function Router() {
+export const Router: FC = () => {
 	return (
 		<main>
 			<div>
@@ -44,4 +51,4 @@ export default function Router() {
 			</div>
 		</main>
 	);
-}
+};

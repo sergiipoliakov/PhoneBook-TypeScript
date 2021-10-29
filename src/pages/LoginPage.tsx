@@ -1,13 +1,22 @@
-import { useAppDispatch } from "../hooks/redux";
+import React, { useState } from "react";
+
+import { useAppDispatch, useAppSelector } from "../hooks/redux";
 import { fetchUser } from "../redux/auth/reducers/ActionCreaters";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
+import { Alert, AlertTitle } from "@material-ui/lab";
 
-import MainContainer from "../components/UI/MaineContainer/MainContainer";
+import { MainContainer } from "../components/UI/MaineContainer/MainContainer";
+
 import Form from "../components/UI/Form/Form";
 import { Input } from "../components/UI/Input/Input";
 import { useForm } from "react-hook-form";
-import PrimaryButton from "../components/UI/PrimaryButton/PrimaryButton";
+import { PrimaryButton } from "../components/UI/PrimaryButton/PrimaryButton";
+
+type FormValues = {
+	email: string;
+	password: string;
+};
 
 const schema = yup.object().shape({
 	email: yup
@@ -20,20 +29,26 @@ const schema = yup.object().shape({
 		.required("Password is a required field"),
 });
 
-export default function LoginPage() {
+export const LoginPage: React.FC = () => {
 	const dispatch = useAppDispatch();
+	const { error } = useAppSelector((state) => state.auth);
+	const [errorMessage, setErrorMessage] = useState("");
 
 	const {
 		register,
 		handleSubmit,
 		formState: { errors },
-	} = useForm({
+	} = useForm<FormValues>({
 		mode: "onBlur",
 		resolver: yupResolver(schema),
 	});
 
-	const onSubmit = (data) => {
-		dispatch(fetchUser(data));
+	const onSubmit = ({ email, password }: FormValues) => {
+		if (error === "Request failed with status code 400") {
+			setErrorMessage("Email or Password is not correct");
+		}
+
+		dispatch(fetchUser({ email, password }));
 	};
 
 	return (
@@ -62,6 +77,12 @@ export default function LoginPage() {
 
 				<PrimaryButton type="submit">Login</PrimaryButton>
 			</Form>
+			{errorMessage && (
+				<Alert severity="error">
+					<AlertTitle>Error</AlertTitle>
+					{errorMessage}
+				</Alert>
+			)}
 		</MainContainer>
 	);
-}
+};

@@ -1,3 +1,5 @@
+import React from "react";
+
 import { paths } from "../../router/Router";
 import { makeStyles } from "@material-ui/core";
 import { MenuItem, MenuList } from "@material-ui/core";
@@ -20,7 +22,7 @@ const useStyles = makeStyles((theme) => ({
 	},
 }));
 
-export default function AuthNav() {
+export const AuthNav: React.FC = () => {
 	const location = useLocation();
 	const styles = useStyles();
 	return (
@@ -43,4 +45,4 @@ export default function AuthNav() {
 			</MenuItem>
 		</MenuList>
 	);
-}
+};
