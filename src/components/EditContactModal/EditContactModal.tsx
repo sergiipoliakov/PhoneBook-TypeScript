@@ -9,7 +9,20 @@ import HighlightOffIcon from "@material-ui/icons/HighlightOff";
 import Form from "../../components/UI/Form/Form";
 import { Input } from "../../components/UI/Input/Input";
 import { useForm } from "react-hook-form";
-import PrimaryButton from "../UI/PrimaryButton/PrimaryButton";
+import { PrimaryButton } from "../UI/PrimaryButton/PrimaryButton";
+
+type FormValues = {
+	name: string;
+	number: string;
+};
+interface IProps {
+	id: string;
+	name?: string;
+
+	number?: string;
+	onModalClose?: () => boolean | null | void;
+	showModal?: boolean;
+}
 
 const useStyles = makeStyles((thema) => ({
 	root: {
@@ -38,13 +51,13 @@ const schema = yup.object().shape({
 	number: yup.string().required("Phone number is a required field"),
 });
 
-export default function EditContactModal({
+export const EditContactModal = ({
 	id,
 	name,
 	number,
-	onModalClose,
+	onModalClose = () => null,
 	showModal,
-}) {
+}: IProps) => {
 	const styles = useStyles();
 	const dispatch = useAppDispatch();
 	const [newName, setNewName] = useState(name);
@@ -58,12 +71,12 @@ export default function EditContactModal({
 		mode: "onBlur",
 		resolver: yupResolver(schema),
 	});
-	const onSubmit = (data) => {
-		dispatch(editContact(id, data));
+	const onSubmit = ({ name, number }: FormValues) => {
+		dispatch(editContact(id, { name, number }));
 		onModalClose();
 	};
 
-	const handleOnBackdropClick = (e) => {
+	const handleOnBackdropClick = (e: React.MouseEvent<HTMLDivElement>) => {
 		if (e.target === e.currentTarget) {
 			onModalClose();
 		}
@@ -71,10 +84,10 @@ export default function EditContactModal({
 	const handleClose = () => {
 		onModalClose();
 	};
-	const handleNameChange = (e) => {
+	const handleNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
 		setNewName(e.target.value);
 	};
-	const handleNumberChange = (e) => {
+	const handleNumberChange = (e: React.ChangeEvent<HTMLInputElement>) => {
 		setNewNumber(e.target.value);
 	};
 
@@ -82,7 +95,7 @@ export default function EditContactModal({
 		<>
 			<Backdrop
 				className={styles.root}
-				open={showModal}
+				open={!!showModal}
 				onClick={handleOnBackdropClick}
 			>
 				<Box className={styles.content}>
@@ -127,4 +140,4 @@ export default function EditContactModal({
 			</Backdrop>
 		</>
 	);
-}
+};

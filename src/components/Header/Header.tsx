@@ -2,12 +2,12 @@ import React from "react";
 import { useAppSelector } from "../../hooks/redux";
 import { Link, useLocation } from "react-router-dom";
 
-import Navigation from "../AppBar/AppBar.tsx";
+import { Navigation } from "../Navigation/Navigation";
 
 import { Typography, Toolbar, AppBar } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
-import AuthNav from "../AuthNav/AuthNav";
-import UserMenu from "../UserMenu/UserMenu";
+import { AuthNav } from "../AuthNav/AuthNav";
+import { UserMenu } from "../UserMenu/UserMenu";
 
 const useStyles = makeStyles((theme) => ({
 	root: {

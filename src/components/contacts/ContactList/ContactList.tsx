@@ -4,8 +4,8 @@ import { useAppSelector } from "../../../hooks/redux";
 import { List } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 
-import Filter from "../../Filter/Filter";
-import ContactItem from "../ContactItem/ContactItem";
+import { Filter } from "../../Filter/Filter";
+import { ContactItem } from "../ContactItem/ContactItem";
 
 type Item = {
 	id: string;

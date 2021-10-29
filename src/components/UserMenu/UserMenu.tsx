@@ -23,7 +23,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 //
-export default function UserMenu() {
+export const UserMenu: React.FC = () => {
 	const styles = useStyles();
 	const dispatch = useAppDispatch();
 	const { user } = useAppSelector((state) => state.auth.user);
@@ -42,4 +42,4 @@ export default function UserMenu() {
 			</IconButton>
 		</div>
 	);
-}
+};

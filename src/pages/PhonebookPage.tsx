@@ -1,9 +1,9 @@
-import { useEffect } from "react";
-import ContactList from "../components/contacts/ContactList/ContactList.tsx";
-import ContactsEditor from "../components/contacts/ContactsEditor/ContactsEditor";
+import { useEffect, FC } from "react";
+import ContactList from "../components/contacts/ContactList/ContactList";
+import { ContactsEditor } from "../components/contacts/ContactsEditor/ContactsEditor";
 import { useAppSelector, useAppDispatch } from "../hooks/redux";
 import { fetchAllContacts } from "../redux/contacts/redusers/ActionCreaters";
-import MainContainer from "../components/UI/MaineContainer/MainContainer";
+import { MainContainer } from "../components/UI/MaineContainer/MainContainer";
 
 import { Backdrop, CircularProgress, makeStyles } from "@material-ui/core";
 
@@ -14,7 +14,7 @@ const useStyles = makeStyles((thema) => ({
 	},
 }));
 
-export default function PhonebookPage() {
+export const PhonebookPage: FC = () => {
 	const styles = useStyles();
 
 	const dispatch = useAppDispatch();
@@ -36,4 +36,4 @@ export default function PhonebookPage() {
 			</Backdrop>
 		</MainContainer>
 	);
-}
+};
